@@ -120,6 +120,36 @@ $$
 
 # Analyse de la complexité
 
+on peut stocker dans des variables au début de l'algorithme 
+
+$$
+\begin{align}
+&\frac{i_{\vec{AB}}}{|i_{\vec{AB}}|} \quad \text{et} \quad \frac{j_{\vec{AB}}}{|j_{\vec{AB}}|} \quad \text{: deux divisions, mais peut être remplacé par une analyse du premier bit de l'entier signé} \\
+&\text{calcul de} \ \vec{AB} \quad \text{:   deux soustractions} \\
+\end{align}
+$$
+
+à chaque étape de l'algorithme, on fait : 
+
+$$
+\begin{align}
+&2 \cdot + \quad \text{une par coin}\\
+&4 \cdot - \text{une par coin et une par determinant}\\
+&2 \cdot \times \text{une par determinant}\\
+&1 - 2 \quad \text{comparaisons de bits, une pour le cas régulier, deux pour le determinant égal à 0}
+\end{align}
+$$
+
+pour $n$ cases traversées, la complexité est de : 
+
+$$
+\begin{align}
+&c_0 = 4 \quad \text{deux soustractions et deux comparaisons}\\
+&c_1 = 4 + 2 + 2 = 8 \text{quatre additions, deux multiplications et deux comparaisons}\\
+&\text{donc} \quad T_{total} = c_0 + c_1 \cdot n = 4 + 8n\\
+&\text{avec pour complexité} \quad \mathcal{O}(n)
+\end{align}
+$$
 
 
 

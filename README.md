@@ -26,7 +26,25 @@ $$C = \begin{pmatrix} i_C & j_C \end{pmatrix}$$
 
 en deux dimensions, seuls deux cotés peuvent être traversés. 
 
-$$\text{le coté} \quad i_C + \frac{i_{\vec{AB}}}{|i_{\vec{AB}}|}\quad \text{et le coté} \quad j_C + \frac{j_{\vec{AB}}}{|j_{\vec{AB}}|}$$
+on exprime $\vec{di}$ et $\vec{dj}$ comme : 
+
+$$
+\begin{align}
+di &= 
+\begin{cases}
+di \\
+0 \quad \text{sinon}
+\end{cases} \\
+\text{et} \\
+dj &= 
+\begin{cases}
+dj \\
+0 \quad \text{sinon}
+\end{cases} \\
+\end{align}
+$$
+
+$$\text{le coté} \quad i_C + di\quad \text{et le coté} \quad j_C + dj$$
 
 il suffit alors d'identifier lequel des deux est traversé par le segment. On utilise le produit vectoriel $2D$ comme le determinant de la matrice
 
@@ -42,22 +60,22 @@ c'est à dire l'air signé entre les deux vecteurs $\vec{u}$ et $\vec{v}$.
 on regarde donc deux coins de la case courante, correctement choisis pour être deux coins d'un coté possible de passage. 
 
 $$
-coin_1 \quad = \begin{pmatrix}i_C + \frac{i_{\vec{AB}}}{|i_{\vec{AB}}|} \quad & j_C \end{pmatrix} \quad \text{et} \quad 
-coin_2 \quad = \begin{pmatrix}i_C + \frac{i_{\vec{AB}}}{|i_{\vec{AB}}|} \quad & j_C + \frac{j_{\vec{AB}}}{|j_{\vec{AB}}|} \end{pmatrix}
+coin_1 \quad = \begin{pmatrix}i_C + di \quad & j_C \end{pmatrix} \quad \text{et} \quad 
+coin_2 \quad = \begin{pmatrix}i_C + di \quad & j_C + dj \end{pmatrix}
 $$
 
 On exprime donc alors les deux vecteurs depuis le point de départ
 
 $$\vec{A coin_1} = 
 \begin{pmatrix}  
-i_C + \frac{i_{\vec{AB}}}{|i_{\vec{AB}}|} - A_i\\ 
+i_C + di - A_i\\ 
 j_C - A_j
 \end{pmatrix}
 \quad \text{et} \quad
 \vec{A coin_2} = 
 \begin{pmatrix}  
-i_C + \frac{i_{\vec{AB}}}{|i_{\vec{AB}}|} - A_i \\ 
-j_C + \frac{j_{\vec{AB}}}{|j_{\vec{AB}}|} - A_j
+i_C + di - A_i \\ 
+j_C + dj - A_j
 \end{pmatrix}
 $$
 
@@ -94,29 +112,126 @@ $$
 C \leftarrow 
 \begin{pmatrix}
 i_C  \\
-j_C + \frac{j_{\vec{AB}}}{|j_{\vec{AB}}|}
+j_C + dj
 \end{pmatrix} \\
 &\text{si} \quad \det(M) \cdot \det(N) < 0 \quad : \quad 
 C \leftarrow 
 \begin{pmatrix}
-i_C  + \frac{i_{\vec{AB}}}{|i_{\vec{AB}}|}\\
+i_C  + di\\
 j_C  
 \end{pmatrix} \\
 &\text{si} \quad \det(M) \cdot \det(N) = 0 \quad : \quad \\
 &\text{ } \quad \det(M) = 0 \quad : \quad 
 C \leftarrow 
 \begin{pmatrix}
-i_C  + \frac{i_{\vec{AB}}}{|i_{\vec{AB}}|}\\
+i_C  + di\\
 j_C  
 \end{pmatrix} \\
 &\text{ } \quad \det(N) = 0 \quad : \quad 
 C \leftarrow 
 \begin{pmatrix}
-i_C  + \frac{i_{\vec{AB}}}{|i_{\vec{AB}}|}\\
-j_C  + \frac{j_{\vec{AB}}}{|j_{\vec{AB}}|}
+i_C  + di\\
+j_C  + dj
 \end{pmatrix} \\
 \end{align}
 $$
+
+
+# Demonstration du cas limite $\det(M) \cdot \det(N) = 0$
+
+
+je cherche a montrer que $\vec{AB}$ est colinéaire à $\vec{Acoin_1}$ si et seulement si $\vec{dj} = 0$.
+
+## Tentative 1 (incorrecte)
+
+$$
+\text{on pose} \quad \vec{di} = 
+\begin{pmatrix}
+di \\
+0
+\end{pmatrix}
+\quad \text{et} \quad \vec{dj} = 
+\begin{pmatrix}
+0 \\
+dj
+\end{pmatrix}\\
+$$
+
+$$
+\begin{align}
+&\vec{Acoin_1} = C + \vec{dj} - A \quad \text{est colinéaire à} \quad \vec{AB} \quad \text{si et seulement si} : \\
+&\vec{AB} = k \cdot \vec{Acoin_1} \\
+&|b_i - a_i| \vec{di} + |b_j - a_j| \vec{dj} = k\ |c_i - a_i|\ \vec{di} + k\ |c_j - a_j|\ \vec{di} + \vec{di}\\
+&\text{avec} \quad 0 < k < 1 \quad \text{étant donné que B ne sera jamais la case courante.} \\
+&\left(|b_i - a_i| - k|c_i - a_i|\right)\vec{d_i} + \left(|b_j - a_j| - k|c_j - a_j|\right)\vec{d_j} = k \vec{di}\\
+&\text{vrai si et seulement si :}
+\begin{cases}
+\vec{dj} = 0\\
+\quad \text{ou}\\
+|b_j - a_j| - k|c_j - a_j| = 0
+\end{cases}
+\quad \\
+&\text{on peut exprimer} \quad c_j \quad \text{comme combinaison de} \quad a_j + n \cdot dj_j  \\
+& \text{avec} \quad n \quad \text{entier} \ge 0 \\
+&|b_j - a_j| - k|c_j - a_j| = 0 \\
+\Rightarrow & |b_j - a_j| - k\ |n\ dj_j + a_j - a_j| = 0 \\
+\Rightarrow & |b_j - a_j| - k\ n\ |dj_j| = 0 \\
+\Rightarrow & |b_j - a_j|  = k\ n\ |dj_j| \\
+avec \quad &|dj_j| = 1\\
+\Rightarrow & |b_j - a_j|  = k\ n\ |bj - aj| \\
+&\text{comme} \quad 0 < k < 1 \quad \text{et} \quad n \quad \text{entier} \quad \ge 0\\
+&\text{comme} \quad b_j - a_j \quad \text{est un entier et que kn n'est pas toujours entier, il n'est pas possible que les deux vecteurs soient colinéaires pour j != 0}
+\end{align}
+$$
+
+## Tentative 2 (incorrecte)
+
+$$
+\begin{align}
+&\vec{AB} \quad \text{colinéaire} \quad \vec{Acoin_1} \quad \text{si et seulement si}\\
+&\begin{cases}
+B_i - A_i = k \ (C_i - A_i + di)\\
+B_j - A_j = k \ (C_j - A_j)\\
+\end{cases}\\
+&\text{avec}\quad 0 < k < 1 \quad \text{comme C n'est jamais B}\\
+&\text{on peut exprimer} \quad C_i \quad \text{comme combinaison de} \quad A_i + n \cdot di  \\
+&\text{et} \quad C_j \quad \text{comme combinaison de} \quad A_j + n \cdot dj  \\
+&\text{donc}\\
+&\begin{cases}
+B_i - A_i = k \ (n\ di + A_i - A_i + di)\\
+B_j - A_j = k \ (n\ dj + A_j - A_j)\\
+\end{cases}\\
+&\text{si}\quad dj \neq 0 \\
+\Rightarrow \quad &\begin{cases}
+B_i - A_i = k \ (n + 1) di\\
+B_j - A_j = k \ n\ dj \\
+\end{cases}\\
+\Rightarrow \quad &n\  \ (B_i - A_i)\ di = (n + 1)(B_j - A_j) \ dj \\
+\Rightarrow \quad &\frac{n + 1}{n}  = \frac{(B_j - A_j) \ dj}{(B_i - A_i) \ dj}\\
+&\text{ce qui est impossible car le membre de gauche n'est jamais un entier et le membre de droite est toujours un entier}\\
+&\text{donc les deux vecteurs son colinéairs si et seulement si} \quad dj = 0
+\end{align}
+$$
+
+## Tentative 3 (incorrecte)
+
+
+
+C'est pour quoi il est correct de traiter le cas limite ainsi : 
+
+```c
+comp = detA * detB;
+if(comp > 0){
+    C.j += dj;
+}
+else if(comp < 0){
+    C.i += di;
+}
+else if(comp == 0){
+    C.i += di;
+    C.j += dj;
+}
+```
 
 # Analyse de la complexité
 
@@ -124,7 +239,7 @@ on peut stocker dans des variables au début de l'algorithme
 
 $$
 \begin{align}
-&\frac{i_{\vec{AB}}}{|i_{\vec{AB}}|} \quad \text{et} \quad \frac{j_{\vec{AB}}}{|j_{\vec{AB}}|} \quad \text{: deux divisions, mais peut être remplacé par une analyse du premier bit de l'entier signé} \\
+&di \quad \text{et} \quad dj \quad \text{: deux divisions, mais peut être remplacé par une analyse du premier bit de l'entier signé} \\
 &\text{calcul de} \ \vec{AB} \quad \text{:   deux soustractions} \\
 \end{align}
 $$
@@ -150,7 +265,6 @@ $$
 &\text{avec pour complexité} \quad \mathcal{O}(n)
 \end{align}
 $$
-
 
 
 

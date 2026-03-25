@@ -151,6 +151,8 @@ A_j + m\ dj \\
 \end{align}
 $$
 
+Donc $dj = 0$ est l'unique cas où $\vec{AB}$ colinéaire à &\vec{Acoin_1}$ 
+
 C'est pour quoi il est correct de traiter le cas limite ainsi : 
 
 ```c

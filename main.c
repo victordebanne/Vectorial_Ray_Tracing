@@ -76,10 +76,10 @@ void VRT(Matrix* m, Vector* A, Vector* B){
 
 int main(){
     Vector A, B;
-    A.i = 9;
-    A.j = 8;
-    B.i = 1;
-    B.j = 1;
+    A.i = 1;
+    A.j = 1;
+    B.i = 9;
+    B.j = 8;
 
     Matrix M;
     init_matrix(&M, 10, 10);
@@ -90,5 +90,4 @@ int main(){
     display_matrix(&M);
 
     return 0;
-
 }

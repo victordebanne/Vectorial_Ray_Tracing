@@ -137,85 +137,19 @@ j_C  + dj
 $$
 
 
-# Demonstration du cas limite $\det(M) \cdot \det(N) = 0$
-
-
-je cherche a montrer que $\vec{AB}$ est colinéaire à $\vec{Acoin_1}$ si et seulement si $\vec{dj} = 0$.
-
-## Tentative 1 (incorrecte)
+# Cas limite $\det(M) \cdot \det(N) = 0$
 
 $$
-\text{on pose} \quad \vec{di} = 
+\begin{align}
+B &= 
 \begin{pmatrix}
-di \\
-0
-\end{pmatrix}
-\quad \text{et} \quad \vec{dj} = 
-\begin{pmatrix}
-0 \\
-dj
+A_i + n\ di \\
+A_j + m\ dj \\
 \end{pmatrix}\\
-$$
-
-$$
-\begin{align}
-&\vec{Acoin_1} = C + \vec{dj} - A \quad \text{est colinéaire à} \quad \vec{AB} \quad \text{si et seulement si} : \\
-&\vec{AB} = k \cdot \vec{Acoin_1} \\
-&|b_i - a_i| \vec{di} + |b_j - a_j| \vec{dj} = k\ |c_i - a_i|\ \vec{di} + k\ |c_j - a_j|\ \vec{di} + \vec{di}\\
-&\text{avec} \quad 0 < k < 1 \quad \text{étant donné que B ne sera jamais la case courante.} \\
-&\left(|b_i - a_i| - k|c_i - a_i|\right)\vec{d_i} + \left(|b_j - a_j| - k|c_j - a_j|\right)\vec{d_j} = k \vec{di}\\
-&\text{vrai si et seulement si :}
-\begin{cases}
-\vec{dj} = 0\\
-\quad \text{ou}\\
-|b_j - a_j| - k|c_j - a_j| = 0
-\end{cases}
-\quad \\
-&\text{on peut exprimer} \quad c_j \quad \text{comme combinaison de} \quad a_j + n \cdot dj_j  \\
-& \text{avec} \quad n \quad \text{entier} \ge 0 \\
-&|b_j - a_j| - k|c_j - a_j| = 0 \\
-\Rightarrow & |b_j - a_j| - k\ |n\ dj_j + a_j - a_j| = 0 \\
-\Rightarrow & |b_j - a_j| - k\ n\ |dj_j| = 0 \\
-\Rightarrow & |b_j - a_j|  = k\ n\ |dj_j| \\
-avec \quad &|dj_j| = 1\\
-\Rightarrow & |b_j - a_j|  = k\ n\ |bj - aj| \\
-&\text{comme} \quad 0 < k < 1 \quad \text{et} \quad n \quad \text{entier} \quad \ge 0\\
-&\text{comme} \quad b_j - a_j \quad \text{est un entier et que kn n'est pas toujours entier, il n'est pas possible que les deux vecteurs soient colinéaires pour j != 0}
+&\text{si} \quad B_i = A_i \quad \text{alors} \quad n = 0 \quad \text{ou} \quad di = 0\\
+&\text{si} \quad B_j = A_j \quad \text{alors} \quad m = 0 \quad \text{ou} \quad dj = 0\\
 \end{align}
 $$
-
-## Tentative 2 (incorrecte)
-
-$$
-\begin{align}
-&\vec{AB} \quad \text{colinéaire} \quad \vec{Acoin_1} \quad \text{si et seulement si}\\
-&\begin{cases}
-B_i - A_i = k \ (C_i - A_i + di)\\
-B_j - A_j = k \ (C_j - A_j)\\
-\end{cases}\\
-&\text{avec}\quad 0 < k < 1 \quad \text{comme C n'est jamais B}\\
-&\text{on peut exprimer} \quad C_i \quad \text{comme combinaison de} \quad A_i + n \cdot di  \\
-&\text{et} \quad C_j \quad \text{comme combinaison de} \quad A_j + n \cdot dj  \\
-&\text{donc}\\
-&\begin{cases}
-B_i - A_i = k \ (n\ di + A_i - A_i + di)\\
-B_j - A_j = k \ (n\ dj + A_j - A_j)\\
-\end{cases}\\
-&\text{si}\quad dj \neq 0 \\
-\Rightarrow \quad &\begin{cases}
-B_i - A_i = k \ (n + 1) di\\
-B_j - A_j = k \ n\ dj \\
-\end{cases}\\
-\Rightarrow \quad &n\  \ (B_i - A_i)\ di = (n + 1)(B_j - A_j) \ dj \\
-\Rightarrow \quad &\frac{n + 1}{n}  = \frac{(B_j - A_j) \ dj}{(B_i - A_i) \ dj}\\
-&\text{ce qui est impossible car le membre de gauche n'est jamais un entier et le membre de droite est toujours un entier}\\
-&\text{donc les deux vecteurs son colinéairs si et seulement si} \quad dj = 0
-\end{align}
-$$
-
-## Tentative 3 (incorrecte)
-
-
 
 C'est pour quoi il est correct de traiter le cas limite ainsi : 
 
